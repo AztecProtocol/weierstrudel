@@ -1,8 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 
-const parser = require('./huff/src/parser');
-const compiler = require('./huff/src/compiler');
+const { compiler } = require('../huff/src');
+const parser = require('../huff/src/parser');
 
 const pathToData = path.posix.resolve(__dirname, './huff_modules');
 
@@ -24,10 +24,7 @@ const contract = {
     deployedBytecode: `0x${bytecode}`,
 };
 
-fs.writeFileSync(
-    path.posix.resolve(__dirname, './weierstrudel.json'),
-    JSON.stringify(contract)
-);
+fs.writeFileSync(path.posix.resolve(__dirname, './weierstrudel.json'), JSON.stringify(contract));
 
 compiler('weierstrudel_project.json', pathToData);
 

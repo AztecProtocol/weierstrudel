@@ -2,7 +2,7 @@ const chai = require('chai');
 const BN = require('bn.js');
 const path = require('path');
 
-const { Runtime } = require('../huff');
+const { Runtime } = require('../../huff');
 const bn128Reference = require('../js_snippets/bn128_reference');
 
 const { p } = bn128Reference;
@@ -25,7 +25,6 @@ const testHelper = `
     DOUBLE__AFFINE<0x00,0x20,0x40,P,P,P,3P>()
 }
 `;
-
 
 function sliceMemory(memArray) {
     const numWords = Math.ceil(memArray.length / 32);
@@ -60,7 +59,6 @@ describe('bn128 double', () => {
         expect(z2.umod(p).eq(reference.z)).to.equal(true);
         expect(z2Mem.eq(z2)).to.equal(true);
     });
-
 
     it('macro DOUBLE__MAIN correctly calculates point doubling (inverted y)', async () => {
         const { x, y, z } = bn128Reference.randomPointJacobian();

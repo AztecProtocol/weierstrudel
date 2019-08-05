@@ -1,12 +1,11 @@
 const path = require('path');
 
-const { Runtime } = require('./huff');
+const { Runtime } = require('../huff/src');
 const bn128Reference = require('./js_snippets/bn128_reference');
 
 const pathToTestData = path.posix.resolve(__dirname, './huff_modules');
 
 const main = new Runtime('main_loop.huff', pathToTestData);
-
 
 async function runMainLoop(numPoints, numIterations) {
     const iterations = [...new Array(numIterations)].map(() => {
@@ -16,12 +15,12 @@ async function runMainLoop(numPoints, numIterations) {
         console.log('scalars = ', scalars);
 
         const calldata = [...new Array(numPoints)].reduce((acc, x, i) => {
-            return ([
+            return [
                 ...acc,
-                { index: (i * 2) * 32, value: points[i].x },
-                { index: ((i * 2) + 1) * 32, value: points[i].y },
-                { index: (numPoints * 64) + (i * 32), value: scalars[i] },
-            ]);
+                { index: i * 2 * 32, value: points[i].x },
+                { index: (i * 2 + 1) * 32, value: points[i].y },
+                { index: numPoints * 64 + i * 32, value: scalars[i] },
+            ];
         }, []);
         return main('MAIN__WEIERSTRUDEL', [], [], calldata);
     });
