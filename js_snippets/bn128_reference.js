@@ -162,9 +162,9 @@ bn128.isEqual = function isEqual(x1, y1, z1, x2, y2, z2) {
                 x2
                     .toRed(pRed)
                     .redMul(zz1)
-                    .fromRed(),
-            ) &&
-        y1
+                    .fromRed()
+            )
+        && y1
             .toRed(pRed)
             .redMul(zzz2)
             .fromRed()
@@ -172,7 +172,7 @@ bn128.isEqual = function isEqual(x1, y1, z1, x2, y2, z2) {
                 y2
                     .toRed(pRed)
                     .redMul(zzz1)
-                    .fromRed(),
+                    .fromRed()
             )
     );
 };
@@ -295,7 +295,7 @@ bn128.scalarMul = (point, scalar) => {
                         x1: accumulator.x,
                         y1: accumulator.y,
                         z1: accumulator.z,
-                    },
+                    }
                 );
             }
         }
@@ -343,7 +343,7 @@ bn128.PRECOMPUTE_TABLE__RESCALE = (point, zIn) => {
 };
 
 bn128.generateTable = (inputPoints) => {
-    const points = inputPoints.map((i) => setRed(i));
+    const points = inputPoints.map(i => setRed(i));
     let globalZ = new BN(1).toRed(pRed);
     const tables = points.map((point) => {
         const scaled = bn128.PRECOMPUTE_TABLE__RESCALE(point, globalZ);

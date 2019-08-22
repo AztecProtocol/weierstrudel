@@ -67,13 +67,13 @@ function sliceMemory(memArray) {
 } */
 
 function generatePoints(num) {
-    return [...new Array(num)].map(() => bn128Reference.randomPoint()).map((point) => ({ x: point.x, y: point.y, z: new BN(1) }));
+    return [...new Array(num)].map(() => bn128Reference.randomPoint()).map(point => ({ x: point.x, y: point.y, z: new BN(1) }));
 }
 
 function generateCalldata(points) {
     const formattedPoints = points.reduce(
         (calldata, { x, y }, i) => [...calldata, { index: i * 64, value: x }, { index: i * 64 + 32, value: y }],
-        [],
+        []
     );
     const offset = formattedPoints.length * 32;
     const scalars = points.reduce((s, x, i) => [...s, { index: offset + i * 32, value: bn128Reference.randomScalar() }], []);
@@ -244,7 +244,7 @@ describe('bn128 precompute table full', () => {
             [p, p1.x, p1.y, dz2[0], dz3[0]],
             [],
             [],
-            1,
+            1
         );
         const expected = splitPoint(p1.x.mul(dz2[0]).umod(p), p1.y.mul(dz3[0]).umod(p));
         const result = sliceMemory(memory);

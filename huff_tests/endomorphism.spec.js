@@ -5,7 +5,9 @@ const EC = require('elliptic');
 const path = require('path');
 
 const { Runtime, getNewVM } = require('../../huff/src/runtime.js');
-const { n, lambda, p, beta, randomPoint } = require('../js_snippets/bn128_reference');
+const {
+    n, lambda, p, beta, randomPoint,
+} = require('../js_snippets/bn128_reference');
 
 const vm = getNewVM();
 
@@ -35,7 +37,7 @@ describe('endomorphism split', () => {
             stack[1]
                 .sub(stack[0].mul(lambda))
                 .umod(n)
-                .eq(k.umod(n)),
+                .eq(k.umod(n))
         ).to.equal(true);
         expect(stack[1].bitLength() <= 127).to.equal(true);
         expect(stack[0].bitLength() <= 127).to.equal(true);

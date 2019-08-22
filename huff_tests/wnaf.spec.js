@@ -76,11 +76,11 @@ describe('wnaf', function describe() {
             const { k1, k2 } = endomorphism.endoSplit(s);
             return [...acc, k2, k1];
         }, []);
-        const referenceWnafs = endoScalars.map((s) => referenceWnaf.wnaf(s));
+        const referenceWnafs = endoScalars.map(s => referenceWnaf.wnaf(s));
         for (let i = 0; i < 128; i += 1) {
             const baseOffset = wnafStartLocation + i * wnafSizeOfEntry;
             const count = memory[baseOffset + 0x1f] || 0;
-            const referenceCount = referenceWnafs.filter((w) => w[i] && w[i].gt(new BN(0))).length;
+            const referenceCount = referenceWnafs.filter(w => w[i] && w[i].gt(new BN(0))).length;
             expect(count).to.equal(referenceCount * 2);
 
             for (let j = 0; j < referenceCount; j += 2) {

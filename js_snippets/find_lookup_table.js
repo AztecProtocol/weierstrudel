@@ -23,10 +23,10 @@ const bnTestValues = (function generateTestVariables() {
         ret.push(t);
     }
     return ret;
-})();
+}());
 
 function testModValue(modValue) {
-    const remainders = bnTestValues.map((v) => v.mod(modValue));
+    const remainders = bnTestValues.map(v => v.mod(modValue));
     const uniques = removeDuplicates(remainders);
     if (uniques.length === 256) {
         return uniques;
@@ -42,7 +42,7 @@ module.exports = function generateLookupTable() {
         found = testModValue(new BN(i, 10));
     }
 
-    found.forEach((v) => console.log(v));
+    found.forEach(v => console.log(v));
 
     const lookupTable = new Uint8Array(i);
 

@@ -38,7 +38,7 @@ describe('wnaf tests', () => {
             frequencies[count] += 1;
             max = Math.max(max, count);
         }
-        const probabilities = frequencies.map((f) => f / 10000);
+        const probabilities = frequencies.map(f => f / 10000);
 
         const conditionalCost = 23;
         const wnafSliceCost = 69;
@@ -79,7 +79,7 @@ describe('wnaf tests', () => {
             frequencies[count] += 1;
             max = Math.max(max, count);
         });
-        const probabilities = frequencies.map((f) => f / 10000);
+        const probabilities = frequencies.map(f => f / 10000);
 
         const conditionalCost = 23;
         const wnafSliceCost = 69;
