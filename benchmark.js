@@ -1,18 +1,18 @@
 const path = require('path');
 
-const { Runtime } = require('../huff/src');
+const { Runtime, getNewVM } = require('../huff/src/runtime.js');
 const bn128Reference = require('./js_snippets/bn128_reference');
 
 const pathToTestData = path.posix.resolve(__dirname, './huff_modules');
 
 const main = new Runtime('main_loop.huff', pathToTestData);
 
+const vm = getNewVM();
+
 async function runMainLoop(numPoints, numIterations) {
     const iterations = [...new Array(numIterations)].map(() => {
         const points = [...new Array(numPoints)].map(() => bn128Reference.randomPoint());
-        console.log('points = ', points);
         const scalars = [...new Array(numPoints)].map(() => bn128Reference.randomScalar());
-        console.log('scalars = ', scalars);
 
         const calldata = [...new Array(numPoints)].reduce((acc, x, i) => {
             return [
@@ -22,7 +22,7 @@ async function runMainLoop(numPoints, numIterations) {
                 { index: numPoints * 64 + i * 32, value: scalars[i] },
             ];
         }, []);
-        return main('MAIN__WEIERSTRUDEL', [], [], calldata);
+        return main(vm, 'MAIN__WEIERSTRUDEL', [], [], calldata, 1);
     });
     const results = await Promise.all(iterations);
     const cumulativeGas = results.reduce((acc, { gas }) => {
