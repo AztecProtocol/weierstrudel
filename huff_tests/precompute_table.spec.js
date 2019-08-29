@@ -173,7 +173,7 @@ describe('bn128 precompute table full', () => {
         tableOffset = stack[0].toNumber();
     });
 
-    it("macro PRECOMPUTE_TABLE__NORMALIZE correctly normalizes a poin'ts x/y coordinates", async () => {
+    it("macro PRECOMPUTE_TABLE__NORMALIZE correctly normalizes a point's x/y coordinates", async () => {
         const point = bn128Reference.randomPointJacobian();
         const zd = bn128Reference.randomFieldElement();
         const zz = zd.mul(zd).umod(p);
