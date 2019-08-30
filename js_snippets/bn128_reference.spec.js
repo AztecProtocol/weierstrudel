@@ -79,8 +79,8 @@ describe('arithmetic tests', () => {
                     x1: jacobianPoint.x.toRed(pRed),
                     y1: jacobianPoint.y.toRed(pRed),
                     z1: jacobianPoint.z.toRed(pRed),
-                },
-            ),
+                }
+            )
         );
         const expected = ecPoints[0].add(ecPoints[1]);
         expect(expected.x.fromRed().eq(result.x.fromRed())).to.equal(true);
@@ -131,7 +131,7 @@ describe('bn128 table test', () => {
     it('generateMultiTable performs correct point additions', () => {
         const points = [bn128.randomPointInternal(), bn128.randomPointInternal(), bn128.randomPointInternal()];
         const { tables } = bn128.generateTable(points);
-        const comparisonTables = points.map((point) => getComparisonTable(point.x, point.y, new BN(1).toRed(pRed)));
+        const comparisonTables = points.map(point => getComparisonTable(point.x, point.y, new BN(1).toRed(pRed)));
 
         for (let i = 0; i < tables.length; i += 1) {
             const { table, doubleZ } = tables[i];
@@ -155,7 +155,7 @@ describe('bn128 table test', () => {
             bn128.randomPointInternal(),
         ];
         const { tables, globalZ } = bn128.generateTable(points);
-        const comparisonTables = points.map((point) => getComparisonTable(point.x, point.y, new BN(1).toRed(pRed)));
+        const comparisonTables = points.map(point => getComparisonTable(point.x, point.y, new BN(1).toRed(pRed)));
         const scaledTables = bn128.PRECOMPUTE_TABLE__RESCALEMultiTable(tables, globalZ);
         for (let i = scaledTables.length - 1; i >= 0; i -= 1) {
             const table = scaledTables[i];

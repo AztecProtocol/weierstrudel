@@ -16,9 +16,9 @@ describe('endomorphism tests', () => {
                     k2
                         .neg()
                         .mul(lambda)
-                        .umod(n),
+                        .umod(n)
                 )
-                .toString(16),
+                .toString(16)
         ).to.equal(scalar.toString(16));
         expect(k1.bitLength() <= 127).to.equal(true);
         expect(k2.bitLength() <= 127).to.equal(true);

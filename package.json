@@ -39,7 +39,7 @@
   "scripts": {
     "benchmark": "node ./benchmark.js",
     "compile": "node ./compile.js",
-    "lint": "eslint --ignore-path ../../.eslintignore .",
+    "lint": "eslint --ignore-path ./.eslintignore .",
     "test": "mocha ./huff_tests/ --colors --exit --recursive --reporter spec --trace-warnings",
     "test:js": "mocha ./js_snippets/ --colors --exit --recursive --reporter spec --trace-warnings"
   }
